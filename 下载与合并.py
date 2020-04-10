@@ -5,6 +5,7 @@ import easygui as t
 lock = threading.Lock()     #只是定义一个锁
 threads = []
 class Input_num():
+    #视频数据流长度begin到end
     def __init__(self,begin = 0,end = 299,long = 3,path = os.getcwd(),url1 = '',url2 = ''):
         self.begin = begin
         self.end = end
@@ -68,7 +69,7 @@ class Add_mp4(Input_num) :
             except:
                 pass
 if __name__ == '__main__' :
-    a = Input_num(url1 = '',url2 = '.ts')
+    a = Input_num(url1 = '',url2 = '.ts')       #url1输入ts字段
     choices = ['下载视频', '合并视频']
     choice = t.choicebox(msg='选择功能', title='', choices=choices)
     if choice:
