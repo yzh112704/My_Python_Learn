@@ -97,13 +97,13 @@ move_times = [1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1]
 def string_to_bit_array(text):  #字符串转二进制比特流
     array = list()
     for char in text:
-        binval = binvalue(char, 8)  #一个字节8位转换为二进制
+        binval = binvalue(char, 16)  #一个字符按16位转换为二进制
         array.extend([int(x) for x in list(binval)])  #转换后的二进制存入列表开头
     return array
 
 
 def bit_array_to_string(array):  #二进制比特流转字符串
-    res = ''.join([chr(int(y, 2)) for y in [''.join([str(x) for x in _bytes]) for _bytes in nsplit(array, 8)]])
+    res = ''.join([chr(int(y, 2)) for y in [''.join([str(x) for x in _bytes]) for _bytes in nsplit(array, 16)]])
                 #chr(ASCII值转ASCII字符)
     return res
 
@@ -132,19 +132,19 @@ class des():
         self.keys = list()              #生成每轮秘钥
 
     def run(self, key, text, action=ENCRYPT, padding=False):
-        if len(key) < 8:
-            raise("秘钥应该为8位字节。")
-        elif len(key) > 8:
-            key = key[:8]  #如果秘钥长度超过8位，截取前8位
+        if len(key) < 4:
+            raise("秘钥应该为4个字符。")
+        elif len(key) > 4:
+            key = key[:4]  #如果秘钥长度超过4个字符，截取前4个字符
         self.password = key
         self.text = text
 
         if padding and action == ENCRYPT:
             self.addPadding()
-        elif len(self.text) % 8 != 0:#如果不填充，则指定的数据大小必须是8字节的倍数
-            raise("数据大小应为8的倍数")
+        elif len(self.text) % 4 != 0:#如果不填充，则指定的数据大小必须是4的倍数
+            raise("数据大小应为4的倍数")
         self.generatekeys()  #生成所有密钥
-        text_blocks = nsplit(self.text, 8)  #将文本分成8个字节的块，因此为64位
+        text_blocks = nsplit(self.text, 4)  #将文本按4个字符分块，一个字符按16位，因此一块64位
         result = list()
         for block in text_blocks:  #遍历所有字节块
             block = string_to_bit_array(block)  #字节块转换为二进制比特流
@@ -217,13 +217,13 @@ class des():
     def decrypt(self, key, text, padding=False):
         return self.run(key, text, DECRYPT, padding)
 
-
+#支持中英文特殊符号的输入
 def main():
     while True:
         tuple = ('加密','解密','退出')
         choice = t.buttonbox('请选择以下功能','DES加解密',tuple)
         if choice == '加密':
-            attention = '注：秘钥长度为8位，如果超出只截取前8位\n  明文为8位或8的倍数位'
+            attention = '注：秘钥长度为4个字符，如果超出只截取前4个字符\n  明文为4个字符或4的倍数字符'
             input_message = ['输入秘钥:', '输入明文']
             s = t.multenterbox(attention, 'DES加密', input_message)
             if s == None :
@@ -240,7 +240,7 @@ def main():
             r = d.encrypt(key, text)
             t.msgbox('DES加密结果：' + r ,'加密结果:', '返回')
         elif choice == '解密':
-            attention = '注：秘钥长度为8位，如果超出只截取前8位'
+            attention = '注：秘钥长度为4个字符，如果超出只截取前4个字符\n'
             input_message = ['输入秘钥:', '输入密文']
             s = t.multenterbox(attention, 'DES解密', input_message)
             if s == None :
@@ -260,3 +260,6 @@ def main():
             return
 if __name__ == '__main__':
     main()
+
+
+
