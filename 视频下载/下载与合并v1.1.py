@@ -4,11 +4,11 @@ import easygui as t
 import os
 
 '''需要自己更改的变量'''
-url = 'http://wuji.zhulong-zuida.com/20190821/6322_99ac4051/1000k/hls/9dd7647526a000000.ts'
+url = 'http://······/000000.ts' #视频流url
 begin = 0                   #视频流(.ts)开始号
 end = 33                   #视频流(.ts)结束号
 long = 4                    #视频流号码变化长度 例如：下载00000.ts到11111.ts时，长度为5
-path = 'F:\\爬虫\\代码\\视频\\视频流\\'     #保存视频流（.ts）的路径
+path = 'F:\\'     #保存视频流（.ts）的路径
 
 '''全局变量'''
 lock = threading.Lock()     #只是定义一个锁
