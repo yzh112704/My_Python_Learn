@@ -4,7 +4,7 @@ from tkinter import *
 import os
 
 
-'''需要自己更改的变量'''
+'''默认变量，需要自己修改'''
 url = 'https://······/000000.ts'
 begin = 0  # 视频流(.ts)开始号
 end = 3  # 视频流(.ts)结束号
