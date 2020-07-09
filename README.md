@@ -22,7 +22,7 @@
 random从词库中随机选择单词  
 使用re正则表达式筛选单词的汉语和英语  
 txt文本记录词库、认识单词、不认识单词、统计已学习单词等内容  
-&emsp;-词库.txt   记录所有四级单词  
-&emsp;-count.txt  记录已学习单词  
-&emsp;-认识.txt   记录认识单词  
-&emsp;-不认识.txt 记录不认识单词  
+&emsp;-词库.txt&emsp;&ensp;记录所有四级单词  
+&emsp;-count.txt&emsp;记录已学习单词  
+&emsp;-认识.txt&emsp;&ensp;记录认识单词  
+&emsp;-不认识.txt&emsp;记录不认识单词  
